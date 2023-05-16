@@ -1,0 +1,43 @@
+c++ : 
+위임 생성자 Circle(int a) Circle() 
+Circle::Circle() : Circle(1){}
+Circle::Circle(int a){}
+inline int math(){}
+구조체 형태선언x -> public
+클래스는 private
+
+#ifndef CIRCLE_H
+#define CIRCLE_H
+
+#endif
+#include "circle.h"
+Circle donut;
+Circle *p;
+p = &donut;
+p->get();
+동적할당
+int *p = new int[5];
+delete [] p;
+this->
+static에선 this사용불가
+getline(cin , string s , '\n');
+cin.ignore();
+s.substr(0,1);
+int a = s.find(s , index);
+a == -1
+break;
+s.replace(s , s.length() , new s);
+index = a + s.length();
+참조변수일경우
+Circle c;
+Circle &ref = c;
+c.setR(20); o
+c->setR(20);X
+매개변수가 Circle &c 일경우 매개변수로 c넘겨주면됨
+strlen() 문자열 길이
+Book::Book(Book& b){//복사 생성자
+	this->title = new char[strlen(b.title) + 1];//동적 할당을 이용하여 문자열 크기 지정
+	strcpy(this->title , b.title);//문자열 복사
+	
+	this->price = b.price;//가격 저장
+}

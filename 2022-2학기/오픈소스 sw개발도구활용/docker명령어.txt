@@ -1,0 +1,174 @@
+대표적인 SSH 클라이언트
+• putty
+• xshell
+• winscp
+• MobaXterm
+• FileZilla
+
+리눅스 ip주소 ifconfig
+• ifconfig 명령어가 설치되어 있지 않은 경우에는 다음 명령어로 설치
+• apt install net-tools
+
+chattr : 파일의 소유자라도 Read-Only로만 파일을 열수 있게 할 수 있고, root도 chattr로 설정한 것을 해
+제하지 않으면 절대 파일을 지울 수 없도록 한다.
+
+• lsattr : 파일에 chattr로 권한 제한이 적용되었는지 여부를 확인해 볼 수 있다.
+
+userdel
+• 사용자를 제거하는데 사용
+• 홈디렉토리까지 제거하기 위해서는 –r 옵션을 사용
+
+컨테이너
+• 프로그램을 어느 환경에서나 바로 실행할 수 있도록 규격화된
+기술임.
+• 이미지를 실행한 상태이며 격리된 공간에서 수행
+• 컨테이너는 종료되어도 메모리에 존재하며, 다시 시작 가능함
+• 한 서버에서 여러 개의 컨테이너 수행이 가능하며 각각 독립적
+으로 수행됨
+
+docker images
+내 컴퓨터에 다운로드된 이미지 목록 보기
+
+docker search [이미지명]
+도커 허브에서 찾고자 하는 이미지를 검색한다.
+
+docker pull [이미지명]
+내 컴퓨터로 이미지 다운로드
+
+docker rmi [이미지명]
+저장된 이미지 삭제
+
+docker ps
+컨테이너 목록 보기
+
+docker run
+• docker run (<옵션>) <이미지 식별자> (<명령어>) (<인자>)
+• -d : 백그라운드 실행
+• -it : 컨테이너로 터미널 입력 전달
+• -name : 컨테이너 이름 부여
+• -v : 볼륨 설정
+
+docker stop
+실행중인 컨테이너 중지
+
+docker start
+중지해 있는 컨테이너 실행
+
+docker exec
+실행중인 컨테이너에서 명령어 실행
+
+docker attach
+컨테이너 터미널 부착
+
+docker kill
+실행중인 컨테이너 종료
+
+docker rm
+• 컨테이너 제거
+• 다수 제거 : docker rm $(docker ps –a –q)
+
+docker commit
+• docker commit 명령어로 이미지 만들기
+
+아파치 웹 서버
+• 장점
+• 오픈소스, 무료
+• 다양한 모듈 제공
+• 방대한 참조 자료
+• 확장성 및 보안 수준이 높음
+• 단점
+• 성능 저하
+• 오버헤드
+
+Nginx WEB Server
+• 장점
+• 오픈소스, 무료
+• 플랫폼이 매우 가벼움
+•
+• 단점
+• 자료 부족
+• 확장 모듈 부족
+
+IIS WEB Server
+• 장점
+• 마이크로소프트에서 지원
+• AS, MSSQL과 쉽게 연동
+• 간편한 GUI
+• 단점
+• 가격 비쌈
+• 윈도우 서버에서만 동작
+• 시스템이 느림
+
+아파치 설치
+• sudo apt update
+ sudo apt install apache2
+
+아파치 방화벽
+• sudo ufw app list
+• sudo ufw allow 'Apache’
+• sudo ufw status
+
+웹 서버 체크
+• sudo systemctl status apache2
+
+웹 콘텐츠 업로드 : /var/www
+• /var/www/html 디렉토리에 필요한 문서를 업로드함
+
+이미지 다운로드
+• wget <이미지 파일 웹 주소>
+• /var/www/html/에서 wget으로 다운로드
+
+wordpress
+장점
+• 다양한 기능의 플러그인과 테마 존재
+• 전세계 거의 모든 국가에 사용자 존재, 워드프레스 기반 프리랜서 용이
+• 웹사이트를 완전히 커스터마이징할 수 있는 자유도
+• 차단율 99%의 스팸 트랙백 차단 엔진 Akismet 사용
+• 단점
+• WordPress의 사용법을 배우는 데에는 시간이 걸림
+• 웹을 완전히 커스터마이징하려면 프로그래밍 언어에 대한 지식이 필요
+• 설치형과 서비스형으로 제공되며, 서비스형은 비용이 필요함
+• 보안적인 취약점
+sudo apt update
+sudo apt install nginx
+sudo apt install docker.io
+sudo apt install docker-compose
+mkdir wp
+cd wp
+nano docker-compose.yml
+sudo docker-compose up -d
+
+tmux 구성 요소
+session: 여러 윈도우로 구성
+window: 터미널 화면, 세션 내에서 탭처럼 사용 가능
+pane: 하나의 윈도우 내에서의 화면 분할
+
+기본 : ctrl + b
+컨트롤 키와 b 키를 누른다.
+
+pane 나누기 : 
+(ctrl + b) % #좌우로 나누기
+(ctrl + b) " #위아래로 나누기
+
+pane 이동하기
+(ctrl + b) 방향키, 
+(ctrl + b) q, 
+(ctrl + b) o #순서대로 이동
+
+pane 삭제 : (ctrl + d)
+
+단축키 목록 : (ctrl + b) ?
+
+Github
+접속 토큰 설정
+• github에 접속을 하기 위해서는 아이디/패스워드 방식에서 토
+큰 방식이나 ssh key 방식을 변경이 되었음
+• 실습을 위해서 토큰 기반 접속을 위한 설정이 필요함
+
+git add . 명령어는 현재 디렉토리에 있는 모든 파일을 stage 단계에 올려줌
+git commit –m “message”는 stage 단계에 있는 파일들에 대해 커밋 생성(새로운 버전 할당)
+git branch –M main : 새로운 브랜치 main 생성
+git push origin main : main 브랜치를 원격 저장소에 전송
+
+git pull
+git status : 파일 상태 확인

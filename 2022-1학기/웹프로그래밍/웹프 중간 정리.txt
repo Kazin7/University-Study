@@ -1,0 +1,191 @@
+- 클래스, 파일 입출력
+- tkinter 의 위젯들, 프로그램 작성
+- 공지사항의 tkinter 예제파일 습득, tkinter 를 이용한 프로그래밍 문제 1 문제
+- Label, Entry, Button, Frame,Text, Entry.get, Entry.insert, Text.insert, 
+- grid 배치 관련 : column, row, columnspan, rowspan
+
+객체 지향 프로그래밍 기법
+-데이터와 기능을 객체라고 불리우는 것으로 묶어서 프로그램을 구성
+
+객체
+-함수와 변수를 하나의 단위로 묶는 방법
+-클래스의 인스턴스
+
+클래스
+-새로운 객체의 형식을 정의하는 것
+
+클래스 생성 : class Car :
+객체 생성 : myCar = Car()
+객체 변수 및 함수 사용
+-변수 : myCar.speed
+-함수 : myCar.drive()
+
+class Car:
+     def__init__(self , speed, color , model):
+          self.speed = speed;
+     def frive(self):
+          self.speed = 10
+myCar = Car()
+myCar.color = "blue"
+myCar.model = "E-class"
+myCar.drive()
+myCar.speed
+
+str(myCar.speed) ->출력하기위해 문자열로 변경
+
+모듈안의클래스 접근
+객체 변수 : 모듈명.객체명.변수
+객체함수 : 모듈명.객체명.함수
+
+클래스 변수 : 공유됨
+-클래스로부터 생성된 모든 인스턴스들이 접근가능
+-클래스 변수는 한개만 존재하며 객체가 클래스 변수를 변경하면 다른 인스턴스들에
+변경사항이 반영
+
+객체변수
+-클래스로부터 생성된 각각의 객체 인스턴스에 속해있는 변수
+-각각의 객체별로 객체변수를 따로가진다
+-서로 공유되지않고 인스턴스에 존재하며 같은 이름의 필드끼리 간섭하지않음
+
+클래스 함수 만드는법
+1.@classmethod //데코레이터 이용
+def how_many(cls): 
+     """Prints the current population.""" 
+2. how_many = classmethod(how_many)//classmethod함수를 이용
+def how_many(self):
+    """Prints the current population.""" 
+3.def how_many(): //클래스 정의시 self인자없는 함수 지정
+"""Prints the current population.""" 
+
+상속
+-코드를 재사용한다
+-다중상속 가능
+-클래스간의 형식과 세부형식을 구현하는것
+=다형성
+-새로운 기능을 추가할시 하위 클래스에도 자동 반영
+class Teacher(SchoolMember): (상속)
+   def __init__(self , name):
+          SchoolMember.__init__(self , name , age) //이렇게 부모 생성자 이용
+
+입출력
+number = input(＂나이를 입력하세요: ")
+ print("life", "is", "too short")
+=>life is too short //,를 이용하여 출력시 한칸띄움
+text[::-1] //문자열 반대로 출력
+
+파일 입출력
+파일 읽기
+-전체 읽어오기
+infile = open("d:\\phones.txt", "r")
+lines = infile.read()
+print(lines)
+infile.close()
+-한줄으로 만들어 읽기
+infile = open("d:\\phones.txt", "r")
+for line in infile:
+    line = line.rstrip()
+    print(line)
+infile.close()
+-한줄씩 읽기
+f = open("C:/ssh/Newfile.txt", 'r')
+while True:
+   line = f.readline()
+   if not line:
+      break
+   print(line)
+f.close()
+
+파일 쓰기
+outfile.write(~)
+
+파일 단어씩읽어오기
+infile = open("d:\\proverbs.txt", "r")
+for line in infile:
+   line = line.rstrip()
+   word_list = line.split()
+   for word in word_list:
+      print(word);
+infile.close()
+//쓰기모드로 열었던 파일을 닫지 않고 다시 사용하려고 하면 오류가 발생. 
+
+with문
+파일을 열고 닫는 것을 자동으로 처리
+with 블록을 벗어나는 순간 열린 파일 객체 f가 자동으로 close
+with open("foo.txt", "w") as f:
+   f.write("Life is too short, you need python")
+
+pickle
+-객체를 영구히 저장
+
+file = open("save.p" , "wb")
+pickle.dump(gameOption,file)
+file.close
+
+file = open("save.p" , "rb")
+obj = pickle.load(file)
+print(obj)
+
+nonlat = '字'
+aa = nonlat.encode("utf-16")
+print(aa)//이상한거나옴
+print(aa.decode("utf-16"))//한자 나옴 
+//utf-8이면 8 utf-16이면 16으로 디코딩인코딩해야됨
+
+mainloop()  
+ 
+ 이벤트 메시지 루프로서 키보드나 마우스 혹은 
+다양한 이벤트로부터 오는 메시지를 받고 전달하는 역할
+
+window.geometry(“200x200+100+100")
+//앞의 곱하기는 가로세로 크기
+//뒤의 100 + 100은 x ,y 좌표
+
+위젯정리
+Frame 컨테이너 위젯. 다른 위젯들을 그룹화할 때 사용 
+Button 단순한 버튼 
+Label 텍스트 혹은 이미지 표시
+Entry 단순한 한 라인 텍스트 박스 
+tkinter.Button(window , text)
+tkinter.Label(window , text)
+tkinter.Entry(window)
+entry.get() //엔트리박스에 입력한 문자열을 반환 
+entry.insert(index, “문자열”) index 위치에 문자열 추가
+
+tkinter.Text(window)
+text.insert("current", "저는 송성호입니다.\n")**
+text.insert("current", "저는 한림대학교에서 근무합니다.")
+text.insert(2.1, " 송성호")
+text.pack() 
+text.tag_add("강조", "1.0", "1.6")//첫번째문자부터 7번째문자까지 강조
+text.tag_config("강조", background="green") //색깔을 녹색으로처리
+text.tag_remove("강조", "1.1", "1.2") //강조지우기
+
+tkinterListbox(window,selectmode='extended', height=0)
+ 
+Frame
+frame1=tkinter.Frame(window, relief="solid", bd=2)
+frame1.pack(side="left", fill="both", expand = True)
+frame2=tkinter.Frame(window, relief="solid", bd=2)
+frame2.pack(side="right", fill="both", expand=True) 
+button1=tkinter.Button(frame1, text="프레임1 :  송성호 영역")
+button1.pack(side="right")
+button2=tkinter.Button(frame2, text="프레임2 : 송중기 영역")
+button2.pack(side="left") 
+
+tkinter에서 배치하는 방식
+-압축 배치(pack)
+-격자 배치(grid)
+-절대 배치(place)
+
+ Grid 
+grid() 메소드에서 row와 column을 정해 주면, 해당 위치에 위젯이 놓임. 
+textbox.grid(row=3, column=3) 
+textbox.grid(row=3, column=3 , rowspan = 4) 
+rowspan일경우 아래로 이동
+columnspan일경우 오른쪽으로 이동
+
+Place
+button.place(x = 0 , y = 0)
+
+Pack
+button.pack()

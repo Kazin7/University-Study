@@ -1,0 +1,257 @@
+리눅스 명령어(단답식 , 객관식)
+
++ 관리자명령어(그룹바꾸는것) , 프로세스명령어 ,Vi제외
+-프로그램 컴파일 및 실행(c , java , python)
+
++네트워크 개념 , 네트워크 관련 명령(nslook ip찾는거 등등)
+
++웹서비스, 데이터베이스 설치방법 (무엇을 설치해야되는가)
+(아파치 , 웹페이지 설정 , 사용자 계정복사X , 마리아DB X)
+
+sudo adduser 사용자명 그룹명
+sudo useradd -g 그룹명 -d /home/사용자 -s /bin/bash 사용자명
+
+sudo userdel 사용자명 ->사용자삭제
+
+리눅스 - 오픈소스 소프트웨어 운영체제
+
+리눅스 사용번 1) 데스크톱 운영체제 -> GUI -> 다양한 어플리케이션
+		-> 설정 -> app설치
+
+	      2) 서버용 (웹서버 , 파일서버 , 웹하드 서버 , 스트리밍서버)
+		 CUI - > 쉘
+		 -> 서버 프로그램 설치(명령어) + 설정변경(vi, cat)
+
+rm *.dat
+ls -al /home/*.dat
+
+head -10 hello.c
+tail -10 hello.c
+more hello.c
+
+head -200 hello.c | tail -100
+
+ps
+ps S
+
+ps -u
+ps -f
+ps -a ps -afs
+
+ps -asf | grep -nc vi
+
+sleep 1000&
+fg %1
+bg %1
+kill -9 프로세스 번호
+kill %n job번호
+
+man 명령어 명령어에 대한 정보를 알려줌
+mkdir 디렉토리생성
+pwd 현재 디렉토리
+which 명령어 명령어의 절대 경로를 보여줌
+cd 이동
+cat < 파일내용 출력
+cat > 파일내용 생성
+cat >> 뒤에 추가
+touch 파일명 => 파일만들기
+ls 파일 내용
+ls -al 경로 -> a 는 숨겨진파일까지 리스트 l은파일의 상세정보 출력 s는 k바이트 단위로 출력
+
+wc 워드카운트 => 줄 단어 문자 순으로 출력
+head
+more
+tail
+who
+whoami
+uname -r
+cp -i 파일을 복사한다i를 추가하면 진짜할건지 물어본다
+cp 파일*n 디렉터리 =>디렉터리로 파일 복사
+cp -r 디렉토리 디렉토리 => 디렉토리 전체 복사
+mv -i 파일1 파일2 =>파일1의 이름을 파일2로 변경
+mv 파일*n 디렉터리 => 파일을 지정된 디렉터리로 이동
+mv 디렉터리 디렉터리 => 디렉터리 이름 변경
+rmdir 빈디렉토리만 삭제가능 rm -r 삭제
+rm과 rmdir로는 안에 뭔가있는 디렉터리 삭제불가 -r을 붙여야 가능
+ln 파일1 파일2 => 파일1에대한 링크를 파일2로 만든다
+ln 파일1 디렉터리 => 파일1에 대한 링크를 같은 이름으로 디렉터리에 생성
+file 파일명 =>파일의 정보를 출력
+chmod (-R) 권한번호 파일혹은 디렉토리 => 접근권한을 변경한다 
+-R을하면 디렉터리안에있는것들 모두 변경
+최대 777 가능
+u,g,o,a +-= rwx
+user , group , others , all
++ 추가 - 감소 = 설정
+r 읽기 w쓰기 x실행
+chmod g+w,o+rw 파일명
+chown su 사용자만가능
+
+리눅스 - 오픈소스 소프트웨어 운영체제
+
+리눅스 사용번 1) 데스크톱 운영체제 -> GUI -> 다양한 어플리케이션
+		-> 설정 -> app설치
+
+	      2) 서버용 (웹서버 , 파일서버 , 웹하드 서버 , 스트리밍서버)
+		 CUI - > 쉘
+		 -> 서버 프로그램 설치(명령어) + 설정변경(vi, cat)
+
+rm *.dat
+ls -al /home/*.dat
+
+ps //프로세스 정보를 출력
+ps S
+pgrep //프로세스 이름으로 찾아 정보를 출력
+ps -u
+ps -f
+ps -a ps -afs
+
+ps -asf | grep -nc vi
+
+pgrep 프로그램 이름 //프로세스 번호를 알려준다
+sleep 1000&
+fg %1 //1번job을 포그라운드로 전환시킨다 sleep시 터미널 사용불가
+bg %1 //백그라운드로 진행시킨다
+stop %2 // 2번작업을 정지시킨다
+kill -9 프로세스 번호 //강제종료
+pkill -9 프로그램 이름 //강제종료
+kill %n job번호 //종료
+who -q //사용자명만 출력
+       -H //출력항목의 제목도 함께출력
+       -b //마지막으로 재부팅한 날짜와 시간 출력
+w 사용자명 // 로그인한 사용자 정보와 현재하고있는 작업정보 출력
+
+ip
+-호스트의 주소지정과패킷에 관한 규약
+tcp
+-ip위에서 동작하는 프로토콜
+인터넷
+-모든 컴퓨터가 서로 연결되어 tcp/ip 프로토콜을 이용해 정보를 주고받는 컴퓨터 통신망
+LAN
+-근거리 통신망으로 가까운지역을 한데 묶는 컴퓨터 네트워크
+이더넷
+-현재 가장 일반적으로 사용
+라우터
+-두개 이상의 네트워크를 연결하는 장치
+-데이터 패킷을 다음 장치로 보내주는 장치
+-공유기 또는 스위치라고도 불림
+게이트웨이
+-고용량 라우터로 LAN을 인터넷에 연결하게 해준다
+
+hostname //사용중인 시스템의 호스트명을 출력한다
+ip addr //사용중인 시스템의 ip주소를 출력한다
+nslookup 호스트명 //지정된 호스트의 ip주소를 알려준다
+finger 사용자명 // 지정된 사용자에 대한 자세한 정보를 알려준다
+write 사용자명 //현재 로그인되어있는 다른 사용자에게 메세지를 보낸다
+wall //현재 로그인되어있는 모든 사용자에게 메세지를 보낸다(파일도 가능)
+
+ftp
+-파일 전송 프로토콜
+-파일을 업로드하거나 다운로드 하기위해 사용
+
+다운로드 // m이 들어갈경우 그 문자가 들어간 모든 파일을 다운로드,업로드한다는뜻
+sftp> get 파일명
+sftp> mget 파일명
+업로드
+sftp> put 파일명
+sftp> mput 파일명
+
+put file.zip //업로드
+get file.zip //다운로드
+mget *zip//모든파일을 다받는다
+
+telnet 호스트명(혹은 ip주소)//지정된 원격호스트에 원격으로 접속
+안전한 원격접속
+ssh 사용자명@호스트명
+ssh -l 사용자명 호스트명
+ssh -l 210.115.229.222 20175119
+sudo apt -get install ssh //ssh설치
+ping 호스트명 //지정된 원격 호스트가 연결가능한지 테스트하여 상태 확인
+
+1:아파치 설치 
+sudo apt -get install apache2
+systemctl status apache2 //아파치가 깔렸는지 확인
+2: 내용 > /var/www/html/
+  웹문서를 만들기
+http://주소/x.html
+3:etc/mod-available/userdir.conf //웹페이지 설정파일
+
+데이터베이스 언어
+-정의어(데이터 베이스 구축 수정)
+-조작어(저장된 데이터를 검색 수정 삽입 삭제)
+-제어어(데이터를 보호 관리)
+apt-get install mariadb-server
+systemctl status mariadb.service
+sudo mariadb //마리아 디비 실행
+ >> sql 문을 이용하여 DB처리
+
+계정@mysql서버ip //이것으로 mariadb접속
+sudo mysqladmin status//마이라디비 상태 정보 출력
+
+sudo adduser 사용자명 그룹명
+sudo useradd -g 그룹명 -d /home/사용자 -s /bin/bash 사용자명
+sudo userdel 사용자명 ->사용자삭제
+
+php사용
+
+php php-gd php-mysql
+
+ps -u | grep apache2
+
+c컴파일
+gcc -o ex.c
+
+gcc ex.c -o ex.out
+
+gcc -o ex.out ex.c(가능)
+
+gcc -o ex.c ex.out(불가능)
+
+자바 컴파일
+javac Exam.java
+
+java Exam
+
+파이썬 컴파일
+python a.py
+
+
+VI
+
+vi +숫자 파일명 => 숫자줄로 커서 이동후 파일염
+vi +/sample 파일명 => sample단어가있는 라인으로 커서 이동
+vi -r 파일명 => 깨진 파일 복구
+i 커서 앞에 삽입
+a커서 뒤에 삽입
+대문자i 현재줄 첫칸앞에 입력
+A 현재줄끝에 입력
+o현재줄 다음에삽입
+O현재줄 앞에 삽입
+H 키화면 맨위
+M 키화면 중간
+L 키화면 맨아래
+단어앞 이동b 단어 뒤이동w : 둘다 단어의 맨앞을 가르킴 (앞에 숫자 가능)
+단어의 끝으로 이동 : e
+앞h 뒤l 아래j 위k
+라인번호+G , :n : 해당줄로감 
+:$ ,G : 파일의 끝줄로 이동
+n+ :n줄만큼 앞으로 이동
+n- : n줄만큼 뒤로
+r : 한글자 교체
+R : esc누를때까지 다른글자 교체
+x:커서위치의 문자 삭제
+dw:커서위치의 단어 삭제
+dd:줄삭제
+줄은 남겨놓고 뒤 다 지우기 D
+u :명령취소
+U :해당줄의 명령 모두 취소
+복사 : y 줄복사 : yy 블록지정 : v
+붙여넣기 : p
+마킹 ma 'a
+:a,b%s /old/new/gc a줄부터b줄까지 파일 정보를 확인하며 변경
+:g/pattern/s/old/new/g 패턴이있는 모든줄을 변경
+:q vi종료
+:w 파일이름 저장
+!bash 쉘로가게된다 돌아올땐 exit
+파일 컴파일
+:!gcc lol.c -o lol.out
+/정방향 검색 ?역방향검색

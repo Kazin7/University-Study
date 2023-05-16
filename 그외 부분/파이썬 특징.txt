@@ -1,0 +1,125 @@
+- 자료구조: 리스트, 튜플, 사전 등
+- 문자열 상수
+- 흐름제어문
+- 함수, 모듈, 패키지
+
+주석 종류 : ''' """ 
+파이썬의 특징
+-개발자는 귀도 반 로섬
+-생산성이 뛰어나다
+-초보자한테 좋은 언어 - 인터프리터 언어
+-문법이 쉬워서 코드를보면 직관적으로 알기 쉽다
+-다양한 플랫폼에서 사용된다
+-라이브러리가 풍부하다
+-애니메이션이나 그래픽을 쉽게 사용한다
+//정수 몫만 /소숫점까지 표현
+print("%d" %10)
+print("{0} was {1} " .format("kim",20)) -> 0,1은 순서가 있음 kim = 0 ,20 = 1 숫자 생략가능
+int age -> str(age)
+print("{0:.3f}".format(1.0/3))
+print ('{0:_^11}'.format('hello'))
+=>___hello___
+print '{name} wrote {book}'.format(name='Swaroop', book='A Byte of Python')
+\'를 하면 '가 나옴
+print(r"Newlines are indicated by \n")
+=>Newlines are indicated by \n 문자열 앞에 r(R)을 붙이면 이스케이프 불가
+
+식별자 규칙
+-첫문자는 알파벳혹은 밑줄_
+-띄어쓰기 불가,-불가><불가
+
+물리적 명령행 : 프로그램 코드내의 한줄
+논리적 명령행 : 인터프리터 관점에서의 한명령 단위
+
+문자열 출력시 중간에 다음줄로 넘기지만 출력은 한줄에 하고 싶을경우 \한뒤 아랫줄에 내용적음
+print(" 결과값은 ", 2*7, " 입니다 .")
+print("반가워요" * 20 ) => 두개 이상일경우 괄호로 묶고 곱함
+x = True;
+not(x)
+y = True; , False
+x and y
+
+기본제어구조 : 순차구조 , 선택구조 , 반복구조
+and or not
+
+import random
+coin = random.randrange(n)
+random.randrange(1,200)
+randint(범위 지정)
+ random.choice([True, False])
+for i in range(1, 5): ->1~4
+for i in [1, 2, 3, 4, 5]:
+for i in range(1, 6, 1): ->1,2,3,4,5 6은포함x
+import os;
+print os.getcwd() ->프로그램을 실행할때 위치하고있는 디렉토리
+
+import sys
+print ('\n\nThe PYTHONPATH is', sys.path, '\n')
+
+.pyc : 일종의 바이트 컴파일된 중간 단계의 파일
+중간단계의 파일을 만들어 두는것
+
+ from math import sqrt 
+math.sqrt 대신sqrt 함수를프로그램에서곧바로 불러와서사용
+ from mymodule import * (__같은 이름들은 불러오지 않는다)
+dir() => 모듈내의 식별자 목록
+
+__init__.py 라는 특별한파일을한 개 포함
+-파이썬에게파이썬모듈을담고 있다는것을 알려주는역할
+-단순 빈 파일이거나패키지를 위한 초기화코드를 포함
+
+리스트
+정렬된 항목들을 담고있는 자료구조
+인덱스-1 은 마지막 원소 -2는 마지막에서 한칸앞
+리스트 복사 :mylist = shoplist[:]
+길이 len(shoplist)
+shoplist = ['apple', 'mango', 'carrot', 'banana'] 
+print shoplist[::-1] -> 반대로 출력
+shoplist.append('item')
+shoplist.insert(1,'taco') => 1번 인덱스에 있는값 변경
+del shoplist[i]
+shoplist.remove("carrot")
+shoplist.pop() =>마지막 원소 삭제 -값이 나옴 변수로 받자
+shoplist.index('mango')
+print(item , end = ",")
+print(shoplist[0:3]) => 인덱스 0~2
+[:] 앞뒤 생략가능
+
+튜플
+여러개의 객체를 모아 담는데 사용
+수정이 불가능하다
+zoo = ('python', 'elephant', 'penguin')
+New_zoo = ‘monkey’, ‘camel’, zoo
+singleton = (2 , )
+
+사전
+키와 값이 존재
+ab = { 'Swaroop' : 'swaroop@swaroopch.com',
+ 'Larry' : 'larry@wall.org', 
+'Matsumoto' : 'matz@ruby-lang.org', 
+'Spammer' : 'spammer@hotmail.com' } 
+print(ab['Swaroop']
+del ab['Swaroop']
+for name, address in ab.items():
+    print 'Contact {} at {}'.format(name, address) 
+ab['Guido'] = 'guido@python.org' 
+if 'Guido' in ab:
+print ab.keys();
+print ab.values();
+   print "\nGuido's address is", ab['Guido']
+for i in sorted(ab.keys()):
+    print(i , ab[i])
+
+열거형의 중요한 두가지 기능
+맴버십 테스트
+인덱싱 연산
+
+집합
+bri = set(['brazil', 'russia', 'india'])
+ 'india' in bri 
+
+name = 'Swaroop'
+name.startswith('Swa') 문자열이 주어진 문자열로 시작하는지의 여부
+name.find('war') != -1 문자열 내에 포함된 특정 문자열의 위치 반환 못찾으면-1
+delimiter.join(mylist) 해당 문자열을 구분자로하여 문자열들을 결합하여 하나의 큰문자열 반환
+

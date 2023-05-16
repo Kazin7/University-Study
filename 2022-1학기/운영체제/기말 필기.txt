@@ -1,0 +1,375 @@
+주소 바인딩 결정 단계
+1.컴파일 단계 결정
+2.메모리 적재 시점 결정(exe)
+3.수행시간 결정(dll)
+
+1,2는 논리주소와 물리주소가 동일
+3은 물리주소가 가변적이다.
+
+논리주소
+-프로그램 내부에서 사용하는 주소
+
+물리주소
+-주소버스에 실리는 주소값
+
+mmu(메모리 관리 유닛)
+-가상 주소를 물리주소로 변환해주는 장치
+-relocation register를 base 레지스터로 사용
+
+cpu -> mmu -> memory
+    가상주소
+   	     물리주소
+
+정적링킹
+-프로그램에서 사용하는 라이브러리가 프로그램 이미지에 포함
+
+동적링킹
+-프로그램 이미지는 스텁만 가지고 실제 코드는 미포함
+-링킹이 수행시간에 이루어짐
+
+스텁
+-동적 라이브러리의 실제 코드에 연결시켜주는 코드 조각
+
+스와핑
+-메모리가 부족한 경우 일부 프로세스를 중지하고 2차 저장장치로 내보낸 후 나중에 다시 가져와 수행하는 방식
+
+할당기법
+1.최초 적합
+-첫번째 블럭이 발견되었을 때 그 블럭을 할당
+
+2.최적 적합
+-블럭등중에서 단편화가 가장 작게 발생하는 블럭을 할당
+-메모리를 점점 작게 만들어 쓸모없게 만든다.
+
+3.최악 적합
+-가용한 블럭들 중에서 단편화가 가장 크게 발생하는 블럭을 할당
+
+외부단편화
+75 150 이 남아있을때 170을 수용하지 못하는 것
+내부단편화
+200 - 170 = 30이 남는것
+
+페이징
+-크기가 동일한 페이지로 가상주소 공간과 이에 매칭하는 물리 주소 공간을 관리하는 것이다.
+
+물리메모리 -> 프레임으로 나누어짐
+논리메모리 -> 페이지로 나누어짐
+
+
+코드와 데이터만 하드디스크에 존재한다.
+정적 링킹이 라이브러리를 모두 가져오기때문에 파일 크기가 크다
+
+외부단편화
+75 150 이 남아있을때 170을 수용하지 못하는 것
+내부단편화
+200 - 170 = 30이 남는것
+
+
+MMU
+VA -> PA로 바꿔주는 기능을 가진다.
+
+TLB
+VA -> PA의 정보를 가지고있음
+
+요구페이징
+필요할때마다 메모리에 페이지를 적재하는것
+
+페이지폴트
+-비어있는 프레임 확보,디스크에 있는 페이지를 프레임으로 복사
+
+페이지 교체정책***
+-메모리가 꽉차있는 상황에서 우선순위가 떨어지는 프레임을 선택하여 swap device(disc)대피시킨다.
+-FIFO,OPT,LRU(가장좋음),LFU,clock
+
+thrashing
+-페이징 오버헤드가 더 커져서 성능이 떨어지는경우
+
+지역성(locality)
+-
+
+copy on write
+-fork된 프로세스가 있을때 부모프로세스의 물리주소를 공유하고있다가 fork된 프로세스가 메모리를 사용할때 물리주소를 할당한다
+
+Belady’s Anomaly*
+
+하드디스크
+-데이터를 가져오는것은 빠르지만 파일을 찾는시간은 오래걸린다.
+-성능을 RPM이 좌우한다.
+-platter -> track - > sector
+
+ssd
+-seek time이라는 것이 없다.
+-chip -> die -> plane -> block -> page
+-파일을 저장하는 것은 page단위지만, 지우는 것은 block단위다.
+-한 페이지를 오래사용하면 할수록 수명이 줄어들기 때문에 웨어레벨링을 사용하여 분산저장한다.
+
+flash memory - FTL - application
+
+웨어레벨링
+-데이터를 분산 저장하는방법
+
+Garbage Collection
+-남아있는 데이터를 삭제하여 비어잇는 공간으로 만든다.
+
+Storage Area Network
+-여러 스토리지를 하나의 네트워크에 연결시키고 이 네트워크에 서버를 연결해 스토리지에 접속한다.
+
+Network-Attached Storage
+-SAN과 다르게 이더넷을 통해 연결하는 방식 ,파일시스템을 제공한다.
+-관리가 쉽지만 대역폭에 한계가 있을수있다.
+
+
+=======================================그림그리기==================
+FCFS 
+-들어온 순서대로 데이터를 처리한다.
+
+SSTF(Shortest Seek Time First)
+-헤더에 가까운 순서대로 데이터를 처리한다.
+
+SCAN
+-헤더부터 0으로 간뒤 차례대로 처리한다.
+
+C-SCAN
+-헤더부터 끝까지 간뒤 다시 0으로 가서 다시 데이터를 처리한다.
+
+C-LOOK
+-헤더부터 가장 높은 데이터로 가서 처리하고 가장 작은 데이터로 가서 순차적으로 처리한다.
+=======================================그림그리기==================
+
+
+partition으로 물리적인 디스크를 논리적으로 나눌수있다. 파일시스템 각각 설치가능하다.
+
+striping
+-데이터를 디스크에 분산저장
+
+mirroring
+-똑같은 데이터를 두군데 저장하는 방법
+
+RAID 0(striping)
+-access time이 짧다. 데이터에 빠르게 접근가능
+
+RAID 1
+-똑같은 데이터를 두곳에 저장한다.
+
+RAID 2
+-디스크 -1개를 사용하고,해밍코드를 사용하여 에러 처리를 한다.(bit단위)
+
+RAID 3
+-디스크 하나를 사용하여 오류 검출한다. 데이터 복구 불가(byte단위)
+
+RAID 4
+-한 디스크가 xor블럭을 저장한다. (블럭 단위)
+
+RAID 5
+-디스크마다 순차적으로 xor블럭을 저장한다.
+
+RAID 1+0
+-디스크마다 각각 미러링
+RAID 0+1
+-디스크 그룹 전체를 미러링
+
+칩셋
+컴퓨터 부품들이 서로 인식할 수 있게 중간에서 조정하는 역할을 맡는 부품
+-노스브리지 : 고속버스 제어
+-사우스브리지: 저속버스 제어
+
+polling
+-운영체제가 일정한 시간마다 장치 주소를 가서 데이터가 준비됐으면 메모리로 보낸다
+
+interrupt
+-장치가 데이터가 준비가 되면 스스로 cpu에게 interrupt를 보내고 담당 handler로 보내서 메모리로 데이터를 보낸다
+
+trap
+-강제로 interrupt를 발생시킨것
+
+Direct Memory Access
+
+Raw I/O
+-하드디스크 파일시스템을 사용하지않고 따로 처리하는 방법
+
+
+1.디렉토리 block -> file
+2. file inode block
+
+file attr
+fule data block -> data block 10 -> 40kb
+		single block  1024 -> 4mb
+		double block 
+
+Dos FAT
+
+super block
+directory block
+FAT- data block의 첫번째를 가르킴(MAP으로 사용)
+inode block
+data block
+
+페이지 폴트
+-프로세스가 특정 페이지를 필요로하는데 물리 메모리에 적재되어있지 않는 경우 프로세를 잠시 멈추고
+-그 페이지를 물리 메모리에 적재시키고 page table에 적는다.
+demand paging을 쓰면 생기는 오버헤드때문에 발생한다.
+
+os에 존재하는 pt를 mmu를 사용하여 가상 주소를 실제 주소로 바꾸어서 메모리에 접근한다.
+이때 mmu에 있는 것을 tlb라고 한다.
+
+EAT(effective access time)
+(1-p)*(memory access time) + p * (average page-fault sevice time)
+
+Single-level Directory : 모든 사용자에 대해서 하나의
+단일한 directory
+
+Two-Level Directory : 사용자 마다 directory를 분리
+
+Tree-Structured Directories
+효율적인 탐색
+
+Acyclic graph
+-문제점 : 공유하기 때문에 dangling point가 생길수있다.
+
+Virtual File System(VFS)
+여러 개의 file system들이 사용할 수 있는 사용
+할 수 있도록, 같은 system call interface (API)를 제공
+-객체 지향 방식
+
+Boot block – 디스크의 첫 번째 block으로 운영체제가 시작하기
+위해 필요한 정보를 가지고 있는 block
+
+Super block – file system관련 정보들이 어디에 저장되어
+있는지에 대한 meta data
+(file system의 매우 중요한 정보 이기 때문에 여러 곳에 중복하여 저장)
+
+File control block (FCB) – file에 관련된 구체적인 자료 구조
+
+Contiguous Allocation
+파일을 물리적으로 연속된 disk block에 저장 (멀티미디어 저장에 사용)
+
+장점
+구현이 간단함
+물리적으로 연속된 공간에 있으므로 전체 파일을 한번에 읽어
+들일 경우 성능이 매우 뛰어남
+
+단점
+파일은 반드시 한번에 끝까지 기록 되어야 한다.
+운영체제 에서 파일의 끝에 예비의 block을 남겨둘 경우, disk의 공간을 낭비하게 됨
+외부단편화
+
+Linked List Allocation
+Disk의 block을 linked list로 구현하여 file의 data를 저장하도록 함
+
+장점
+File의 data block은 disk의 어떠한 곳이든지 위치 할 수 있다.
+Contiguous allocation의 방법과 달리 공간의 낭비가 없음
+외부 단편화 X
+
+단점
+Random access가 불가능
+File의 특정 위치를 찾기 위해서는 file의 시작부터 찾아가야
+한다.
+
+Linked List Allocation Using an Index
+File의 data에 관련된 block을 하나의 block에 모아둠
+File의 data block중 하나를 index block이라 하여, 모든 data 
+block의 위치를 index block에서 알 수 있음
+
+Linked List Allocation 보다 개선된 점
+Random access시, 하나의 data block (index block)에서 찾아
+가고자 하는 data block의 위치를 알 수 있으므로 Linked List 
+Allocation 방법보다 빨리 random access를 할 수 있음
+
+단점
+최대 파일의 크기는 고정 되어 짐
+Index block의 크기가 고정 되어 있기 때문에 index block에서
+수용 할 수 있는 disk block에 대한 pointer의 수는 한정되어
+있기 때문
+
+I-nodes(리눅스 보편적 사용)
+File에 대한 data block index들을 table 형태로 관리하는 방법
+큰 메모리 영역을 관리 하기 위해서 1-level paging 보다는 multilevel paging을 사용하는 것과 유사함
+
+I-node의 구성 요소
+File에 대한 속성을 나타내는 field
+작은 크기의 파일을 위한 direct index
+파일의 크기가 커짐에 따라서 요구되는 data block의 index들을
+저장하기 위한 index table들
+direct block 4kb
+single indirect block 4mb
+double indirect block 4gb
+triple indirect block 4Tb
+
+
+주소 바인딩 결정 단계
+1.컴파일 단계 결정
+2.메모리 적재 시점 결정(exe)
+3.수행시간 결정(dll)
+
+1,2는 논리주소와 물리주소가 동일
+3은 물리주소가 가변적이다.
+
+논리주소
+-프로그램 내부에서 사용하는 주소
+
+물리주소
+-주소버스에 실리는 주소값
+
+mmu(메모리 관리 유닛)
+-가상 주소를 물리주소로 변환해주는 장치
+-relocation register를 base 레지스터로 사용
+
+cpu -> mmu -> memory
+    가상주소
+   	     물리주소
+
+정적링킹
+-프로그램에서 사용하는 라이브러리가 프로그램 이미지에 포함
+
+동적링킹
+-프로그램 이미지는 스텁만 가지고 실제 코드는 미포함
+-링킹이 수행시간에 이루어짐
+
+스텁
+-동적 라이브러리의 실제 코드에 연결시켜주는 코드 조각
+
+스와핑
+-메모리가 부족한 경우 일부 프로세스를 중지하고 2차 저장장치로 내보낸 후 나중에 다시 가져와 수행하는 방식
+
+할당기법
+1.최초 적합
+-첫번째 블럭이 발견되었을 때 그 블럭을 할당
+
+2.최적 적합
+-블럭등중에서 단편화가 가장 작게 발생하는 블럭을 할당
+-메모리를 점점 작게 만들어 쓸모없게 만든다.
+
+3.최악 적합
+-가용한 블럭들 중에서 단편화가 가장 크게 발생하는 블럭을 할당
+
+외부단편화
+75 150 이 남아있을때 170을 수용하지 못하는 것
+내부단편화
+200 - 170 = 30이 남는것
+
+페이징
+-크기가 동일한 페이지로 가상주소 공간과 이에 매칭하는 물리 주소 공간을 관리하는 것이다.
+
+물리메모리 -> 프레임으로 나누어짐
+논리메모리 -> 페이지로 나누어짐
+
+Acyclic graph
+-문제점 : 공유하기 때문에 dangling point가 생길수있다.
+
+1.디렉토리 block -> file
+2. file inode block
+
+file attr
+fule data block -> data block 10 -> 40kb
+		single block  1024 -> 4mb
+		double block 
+
+Dos FAT
+
+super block
+directory block
+FAT- data block의 첫번째를 가르킴(MAP으로 사용)
+inode block
+data block
+
